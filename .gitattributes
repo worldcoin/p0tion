@@ -1,0 +1,2 @@
+packages/phase2cli/circuits/oprf/*.r1cs filter=lfs diff=lfs merge=lfs -text
+packages/phase2cli/circuits/oprf/*.wasm filter=lfs diff=lfs merge=lfs -text
