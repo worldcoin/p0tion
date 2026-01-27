@@ -3,7 +3,7 @@
     "type": "module",
     "version": "1.2.7-worldcoin.0",
     "description": "All-in-one interactive command-line for interfacing with zkSNARK Phase 2 Trusted Setup ceremonies",
-    "repository": "git@github.com:privacy-scaling-explorations/p0tion.git",
+    "repository": "https://github.com/worldcoin/p0tion",
     "homepage": "https://github.com/privacy-scaling-explorations/p0tion",
     "bugs": "https://github.com/privacy-scaling-explorations/p0tion/issues",
     "license": "MIT",
