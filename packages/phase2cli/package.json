@@ -75,7 +75,7 @@
         "@octokit/auth-oauth-app": "^7.0.0",
         "@octokit/auth-oauth-device": "^7.0.0",
         "@octokit/request": "^9.0.0",
-        "@p0tion/actions": "^1.2.7",
+        "@p0tion/actions": "^1.2.6",
         "@semaphore-protocol/identity": "^3.15.1",
         "blakejs": "^1.2.1",
         "boxen": "^7.1.0",
@@ -102,6 +102,9 @@
         "snarkjs": "0.7.6",
         "timer-node": "^5.0.7",
         "winston": "^3.17.0"
+    },
+    "overrides": {
+        "firebase": "^10.9.0"
     },
     "publishConfig": {
         "access": "public"
