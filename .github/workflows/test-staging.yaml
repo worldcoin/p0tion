@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   test-staging:
+    if: false # Disabled - p0tion CI not used in worldcoin fork
     uses: ./.github/workflows/firebase-test.yaml
     secrets: inherit
     with:
