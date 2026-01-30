@@ -28,3 +28,6 @@ docs/*
 
 
 *.env
+
+# worktrees
+.worktrees/
