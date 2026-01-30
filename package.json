@@ -65,8 +65,9 @@
         "prettier": "^2.8.8",
         "rimraf": "^5.0.0",
         "rollup": "^3.29.5",
-        "ts-node": "^10.9.1",
-        "typedoc": "^0.24.7"
+        "ts-node": "^10.9.2",
+        "typedoc": "^0.24.7",
+        "typescript": "^5.4.0"
     },
     "config": {
         "commitizen": {
@@ -92,6 +93,7 @@
         "diff": "^5.2.2",
         "on-headers": "^1.1.0",
         "tmp": "^0.2.4",
-        "@smithy/config-resolver": "^4.4.0"
+        "@smithy/config-resolver": "^4.4.0",
+        "mocha": "^10.7.3"
     }
 }
