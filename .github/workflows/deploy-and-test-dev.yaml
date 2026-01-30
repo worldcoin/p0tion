@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   deploy-dev:
+    if: false # Disabled - p0tion CI not used in worldcoin fork
     uses: ./.github/workflows/firebase-deploy-dev.yaml
     secrets: inherit
     with:
@@ -23,6 +24,7 @@ jobs:
 
   test-dev:
     needs: deploy-dev
+    if: false # Disabled - p0tion CI not used in worldcoin fork
     uses: ./.github/workflows/firebase-test.yaml
     secrets: inherit
     with:

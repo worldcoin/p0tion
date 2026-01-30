@@ -8,6 +8,7 @@ on:
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
+    if: false # Disabled - p0tion CI not used in worldcoin fork
     runs-on: ubuntu-latest
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
@@ -39,6 +40,7 @@ jobs:
   do-the-job:
     name: Do the job on the runner
     needs: start-runner # required to start the main job when the runner is ready
+    if: false # Disabled - p0tion CI not used in worldcoin fork
     runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
     steps:
       - name: checkout repo
@@ -84,7 +86,7 @@ jobs:
       - start-runner # required to get output from the start-runner job
       - do-the-job # required to wait when the main job is done
     runs-on: ubuntu-latest
-    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+    if: false # Disabled - p0tion CI not used in worldcoin fork
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
