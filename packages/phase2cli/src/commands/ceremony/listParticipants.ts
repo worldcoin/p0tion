@@ -1,5 +1,6 @@
 import { collection, doc, getDocs } from "firebase/firestore"
-import { ParticipantDocument, UserDocument, commonTerms, getAllCeremonies } from "@p0tion/actions"
+import { ParticipantDocument, UserDocument, commonTerms } from "@p0tion/actions"
+import { getAllCeremonies } from "../../lib/database.js"
 import theme from "../../lib/theme.js"
 import { bootstrapCommandExecutionAndServices } from "../../lib/services.js"
 import { showError } from "../../lib/errors.js"

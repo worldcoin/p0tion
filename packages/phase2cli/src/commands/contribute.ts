@@ -1,19 +1,13 @@
 #!/usr/bin/env node
 
 import {
-    getOpenedCeremonies,
-    getCeremonyCircuits,
     checkParticipantForCeremony,
-    getDocumentById,
-    getParticipantsCollectionPath,
     getContributionsValidityForContributor,
     formatZkeyIndex,
-    getCurrentActiveParticipantTimeout,
     getCircuitBySequencePosition,
     convertBytesOrKbToGb,
     resumeContributionAfterTimeoutExpiration,
     progressToNextCircuitForContribution,
-    getCircuitContributionsFromContributor,
     ParticipantStatus,
     ParticipantContributionStep,
     Contribution,
@@ -23,6 +17,14 @@ import {
     commonTerms,
     convertToDoubleDigits
 } from "@p0tion/actions"
+import {
+    getOpenedCeremonies,
+    getCeremonyCircuits,
+    getDocumentById,
+    getParticipantsCollectionPath,
+    getCurrentActiveParticipantTimeout,
+    getCircuitContributionsFromContributor
+} from "../lib/database.js"
 import { DocumentSnapshot, DocumentData, Firestore, onSnapshot, Timestamp } from "firebase/firestore"
 import { Functions } from "firebase/functions"
 import open from "open"

@@ -2,7 +2,7 @@ import {
     getCurrentFirebaseAuthUser,
     initializeFirebaseCoreServices,
     signInToFirebaseWithCredentials
-} from "@p0tion/actions"
+} from "./firebase.js"
 import clear from "clear"
 import figlet from "figlet"
 import { FirebaseApp } from "firebase/app"

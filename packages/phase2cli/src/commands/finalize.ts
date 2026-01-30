@@ -2,11 +2,7 @@
 import open from "open"
 import {
     isCoordinator,
-    getClosedCeremonies,
-    getDocumentById,
-    getParticipantsCollectionPath,
     checkAndPrepareCoordinatorForFinalization,
-    getCeremonyCircuits,
     getVerificationKeyStorageFilePath,
     getBucketName,
     multiPartUpload,
@@ -23,6 +19,12 @@ import {
     FirebaseDocumentInfo,
     exportVkey
 } from "@p0tion/actions"
+import {
+    getClosedCeremonies,
+    getDocumentById,
+    getParticipantsCollectionPath,
+    getCeremonyCircuits
+} from "../lib/database.js"
 import { Functions } from "firebase/functions"
 import { Firestore } from "firebase/firestore"
 import { dirname } from "path"

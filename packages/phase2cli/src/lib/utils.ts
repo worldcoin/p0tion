@@ -10,8 +10,6 @@ import {
     formatZkeyIndex,
     generateGetObjectPreSignedUrl,
     getBucketName,
-    getDocumentById,
-    getParticipantsCollectionPath,
     getZkeyStorageFilePath,
     multiPartUpload,
     numExpIterations,
@@ -21,6 +19,7 @@ import {
     verifyContribution,
     contribHashRegex
 } from "@p0tion/actions"
+import { getDocumentById, getParticipantsCollectionPath } from "./database.js"
 import { Presets, SingleBar } from "cli-progress"
 import dotenv from "dotenv"
 import { GithubAuthProvider, OAuthCredential } from "firebase/auth"

@@ -1,4 +1,5 @@
-import { commonTerms, getAllCollectionDocs } from "@p0tion/actions"
+import { commonTerms } from "@p0tion/actions"
+import { getAllCollectionDocs } from "../lib/database.js"
 import { showError } from "../lib/errors.js"
 import { bootstrapCommandExecutionAndServices } from "../lib/services.js"
 

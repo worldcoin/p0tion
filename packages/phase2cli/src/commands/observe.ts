@@ -2,12 +2,14 @@
 
 import {
     FirebaseDocumentInfo,
-    getCeremonyCircuits,
-    getCircuitContributionsFromContributor,
-    getOpenedCeremonies,
     isCoordinator,
     convertToDoubleDigits
 } from "@p0tion/actions"
+import {
+    getCeremonyCircuits,
+    getCircuitContributionsFromContributor,
+    getOpenedCeremonies
+} from "../lib/database.js"
 import { Firestore } from "firebase/firestore"
 import logSymbols from "log-symbols"
 import readline from "readline"
