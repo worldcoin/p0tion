@@ -95,6 +95,7 @@
         "tmp": "^0.2.4",
         "@smithy/config-resolver": "^4.4.0",
         "mocha": "^10.7.3",
-        "glob": "^10.4.5"
+        "glob": "^10.4.5",
+        "gtoken": "^7.1.0"
     }
 }
