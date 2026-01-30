@@ -24,7 +24,9 @@ import {
     sleep,
     terminate
 } from "../lib/utils.js"
+import { config } from "../lib/config.js"
 
+// Load .env file if present (for development/override)
 const packagePath = `${dirname(fileURLToPath(import.meta.url))}`
 dotenv.config({
     path: packagePath.includes(`src/lib`)
@@ -176,7 +178,7 @@ const auth = async () => {
         spinner.fail(`No local authentication token found\n`)
 
         // Generate a new access token using Github Device Flow (OAuth 2.0).
-        const newToken = await executeGithubDeviceFlow(String(process.env.AUTH_GITHUB_CLIENT_ID))
+        const newToken = await executeGithubDeviceFlow(config.AUTH_GITHUB_CLIENT_ID)
 
         // Store the new access token.
         setLocalAuthMethod("github")

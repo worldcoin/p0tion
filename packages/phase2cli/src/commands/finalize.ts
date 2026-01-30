@@ -47,6 +47,7 @@ import {
 import theme from "../lib/theme.js"
 import { checkAndMakeNewDirectoryIfNonexistent, writeLocalJsonFile, writeFile } from "../lib/files.js"
 import { promptForCeremonySelection, promptToTypeEntropyOrBeacon } from "../lib/prompts.js"
+import { config } from "../lib/config.js"
 
 /**
  * Export and store on the ceremony bucket the verification key for the given final contribution.
@@ -82,7 +83,7 @@ export const handleVerificationKey = async (
         bucketName,
         verificationKeyStorageFilePath,
         verificationKeyLocalFilePath,
-        Number(process.env.CONFIG_STREAM_CHUNK_SIZE_IN_MB)
+        config.CONFIG_STREAM_CHUNK_SIZE_IN_MB
     )
 
     spinner.succeed(`Verification key correctly saved on storage`)
@@ -130,7 +131,7 @@ export const handleVerifierSmartContract = async (
         bucketName,
         verifierContractStorageFilePath,
         verifierContractLocalFilePath,
-        Number(process.env.CONFIG_STREAM_CHUNK_SIZE_IN_MB)
+        config.CONFIG_STREAM_CHUNK_SIZE_IN_MB
     )
 
     spinner.succeed(`Verifier smart contract correctly saved on storage`)
@@ -203,7 +204,7 @@ export const handleCircuitFinalization = async (
     )
 
     // Get ceremony bucket.
-    const bucketName = getBucketName(ceremonyPrefix, String(process.env.CONFIG_CEREMONY_BUCKET_POSTFIX))
+    const bucketName = getBucketName(ceremonyPrefix, config.CONFIG_CEREMONY_BUCKET_POSTFIX)
 
     // Step (2 & 4).
     await handleVerificationKey(

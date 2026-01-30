@@ -62,6 +62,7 @@ import {
     getFileStats,
     checkAndMakeNewDirectoryIfNonexistent
 } from "../lib/files.js"
+import { config } from "../lib/config.js"
 
 /**
  * Handle whatever is needed to obtain the input data for a circuit that the coordinator would like to add to the ceremony.
@@ -410,7 +411,7 @@ export const handleCeremonyBucketCreation = async (
     ceremonyPrefix: string
 ): Promise<string> => {
     // Compose bucket name using the ceremony prefix.
-    const bucketName = getBucketName(ceremonyPrefix, process.env.CONFIG_CEREMONY_BUCKET_POSTFIX!)
+    const bucketName = getBucketName(ceremonyPrefix, config.CONFIG_CEREMONY_BUCKET_POSTFIX)
 
     const spinner = customSpinner(`Getting ready for ceremony files and data storage...`, `clock`)
     spinner.start()
@@ -453,7 +454,7 @@ export const handleCircuitArtifactUploadToStorage = async (
         bucketName,
         storageFilePath,
         localPathAndFileName,
-        Number(process.env.CONFIG_STREAM_CHUNK_SIZE_IN_MB)
+        config.CONFIG_STREAM_CHUNK_SIZE_IN_MB
     )
 
     spinner.succeed(`Upload of (${theme.text.bold(completeFilename)}) file completed successfully`)

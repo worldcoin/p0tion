@@ -44,6 +44,7 @@ import {
     getTranscriptLocalFilePath
 } from "./localConfigs.js"
 import theme from "./theme.js"
+import { config } from "./config.js"
 
 const packagePath = `${dirname(fileURLToPath(import.meta.url))}`
 dotenv.config({
@@ -616,7 +617,7 @@ export const handleStartOrResumeContribution = async (
     )
 
     // Get ceremony bucket name.
-    const bucketName = getBucketName(ceremonyPrefix, String(process.env.CONFIG_CEREMONY_BUCKET_POSTFIX))
+    const bucketName = getBucketName(ceremonyPrefix, config.CONFIG_CEREMONY_BUCKET_POSTFIX)
 
     await sleep(3000) // ~3s.
     spinner.stop()
@@ -737,7 +738,7 @@ export const handleStartOrResumeContribution = async (
                 bucketName,
                 nextZkeyStorageFilePath,
                 nextZkeyLocalFilePath,
-                Number(process.env.CONFIG_STREAM_CHUNK_SIZE_IN_MB),
+                config.CONFIG_STREAM_CHUNK_SIZE_IN_MB,
                 ceremony.id,
                 participantData.tempContributionData,
                 progressBar
@@ -750,7 +751,7 @@ export const handleStartOrResumeContribution = async (
                 bucketName,
                 nextZkeyStorageFilePath,
                 nextZkeyLocalFilePath,
-                Number(process.env.CONFIG_STREAM_CHUNK_SIZE_IN_MB)
+                config.CONFIG_STREAM_CHUNK_SIZE_IN_MB
             )
 
         // small sleep to ensure the previous step is completed
@@ -803,7 +804,7 @@ export const handleStartOrResumeContribution = async (
                 circuit,
                 bucketName,
                 contributorOrCoordinatorIdentifier,
-                String(process.env.FIREBASE_CF_URL_VERIFY_CONTRIBUTION)
+                config.FIREBASE_CF_URL_VERIFY_CONTRIBUTION
             )
         } catch (error: any) {
             process.stdout.write(
