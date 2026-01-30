@@ -1,4 +1,4 @@
-import { User, getAuth, signInWithCredential, initializeAuth, OAuthCredential } from "firebase/auth"
+import { User, getAuth, signInWithCredential, OAuthCredential } from "firebase/auth"
 import { FirebaseApp } from "firebase/app" // ref https://firebase.google.com/docs/web/setup#access-firebase.
 
 /**
@@ -7,7 +7,7 @@ import { FirebaseApp } from "firebase/app" // ref https://firebase.google.com/do
  * @param credentials <OAuthCredential> - the OAuth credential generated from token exchange.
  */
 export const signInToFirebaseWithCredentials = async (firebaseApp: FirebaseApp, credentials: OAuthCredential) =>
-    signInWithCredential(initializeAuth(firebaseApp), credentials)
+    signInWithCredential(getAuth(firebaseApp), credentials)
 
 /**
  * Return the current authenticated user in the given Firebase Application.
