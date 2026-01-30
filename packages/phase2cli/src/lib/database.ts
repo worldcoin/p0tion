@@ -17,7 +17,14 @@ import {
     Timestamp,
     where
 } from "firebase/firestore"
-import { CeremonyState, FirebaseDocumentInfo, commonTerms } from "@p0tion/actions"
+import {
+    CeremonyState,
+    FirebaseDocumentInfo,
+    commonTerms,
+    ContributionValidity,
+    Contribution,
+    finalContributionIndex
+} from "@p0tion/actions"
 
 /**
  * Get participants collection path for database reference.
@@ -169,4 +176,129 @@ export const getClosedCeremonies = async (firestoreDatabase: Firestore): Promise
 export const getAllCeremonies = async (firestoreDatabase: Firestore): Promise<Array<FirebaseDocumentInfo>> => {
     const ceremoniesQuerySnap = await queryCollection(firestoreDatabase, commonTerms.collections.ceremonies.name, [])
     return fromQueryToFirebaseDocumentInfo(ceremoniesQuerySnap.docs)
+}
+
+/**
+ * Get the validity of contributors' contributions for each circuit of the given ceremony.
+ */
+export const getContributionsValidityForContributor = async (
+    firestoreDatabase: Firestore,
+    circuits: Array<FirebaseDocumentInfo>,
+    ceremonyId: string,
+    participantId: string,
+    isFinalizing: boolean
+): Promise<Array<ContributionValidity>> => {
+    const contributionsValidity: Array<ContributionValidity> = []
+
+    for await (const circuit of circuits) {
+        const circuitContributionsFromContributor = await getCircuitContributionsFromContributor(
+            firestoreDatabase,
+            ceremonyId,
+            circuit.id,
+            participantId
+        )
+
+        const contribution = isFinalizing
+            ? circuitContributionsFromContributor
+                  .filter(
+                      (contributionDocument: FirebaseDocumentInfo) =>
+                          contributionDocument.data.zkeyIndex === finalContributionIndex
+                  )
+                  .at(0)
+            : circuitContributionsFromContributor.at(0)
+
+        if (!contribution)
+            throw new Error(
+                "Unable to retrieve contributions for the participant. There may have occurred a database-side error. Please, we kindly ask you to terminate the current session and repeat the process"
+            )
+
+        contributionsValidity.push({
+            contributionId: contribution?.id,
+            circuitId: circuit.id,
+            valid: contribution?.data.valid
+        })
+    }
+
+    return contributionsValidity
+}
+
+/**
+ * Return the public attestation preamble for given contributor.
+ */
+export const getPublicAttestationPreambleForContributor = (
+    contributorIdentifier: string,
+    ceremonyName: string,
+    isFinalizing: boolean
+) =>
+    `Hey, I'm ${contributorIdentifier} and I have ${isFinalizing ? "finalized" : "contributed to"} the ${ceremonyName}${
+        ceremonyName.toLowerCase().includes("trusted setup") || ceremonyName.toLowerCase().includes("ceremony")
+            ? "."
+            : " MPC Phase2 Trusted Setup ceremony."
+    }\nThe following are my contribution signatures:`
+
+/**
+ * Check and prepare public attestation for the contributor made only of its valid contributions.
+ */
+export const generateValidContributionsAttestation = async (
+    firestoreDatabase: Firestore,
+    circuits: Array<FirebaseDocumentInfo>,
+    ceremonyId: string,
+    participantId: string,
+    participantContributions: Array<Contribution>,
+    contributorIdentifier: string,
+    ceremonyName: string,
+    isFinalizing: boolean
+): Promise<string> => {
+    let publicAttestation = getPublicAttestationPreambleForContributor(
+        contributorIdentifier,
+        ceremonyName,
+        isFinalizing
+    )
+
+    const contributionsWithValidity = await getContributionsValidityForContributor(
+        firestoreDatabase,
+        circuits,
+        ceremonyId,
+        participantId,
+        isFinalizing
+    )
+
+    for await (const contributionWithValidity of contributionsWithValidity) {
+        const matchedContributions = participantContributions.filter(
+            (contribution: Contribution) => contribution.doc === contributionWithValidity.contributionId
+        )
+
+        if (matchedContributions.length === 0)
+            throw new Error(
+                `Unable to retrieve given circuit contribution information. This could happen due to some errors while writing the information on the database.`
+            )
+
+        if (matchedContributions.length > 1)
+            throw new Error(`Duplicated circuit contribution information. Please, contact the coordinator.`)
+
+        const participantContribution = matchedContributions.at(0)!
+
+        const circuitDocument = await getDocumentById(
+            firestoreDatabase,
+            getCircuitsCollectionPath(ceremonyId),
+            contributionWithValidity.circuitId
+        )
+        const contributionDocument = await getDocumentById(
+            firestoreDatabase,
+            getContributionsCollectionPath(ceremonyId, contributionWithValidity.circuitId),
+            participantContribution.doc
+        )
+
+        if (!contributionDocument.data() || !circuitDocument.data())
+            throw new Error(`Something went wrong when retrieving the data from the database`)
+
+        const { sequencePosition, prefix } = circuitDocument.data()!
+        const { zkeyIndex } = contributionDocument.data()!
+
+        publicAttestation = `${publicAttestation}\n\nCircuit # ${sequencePosition} (${prefix})\nContributor # ${
+            zkeyIndex > 0 ? Number(zkeyIndex) : zkeyIndex
+        }\n${participantContribution.hash}`
+    }
+
+    return publicAttestation
 }

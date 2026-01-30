@@ -2,7 +2,6 @@
 
 import {
     checkParticipantForCeremony,
-    getContributionsValidityForContributor,
     formatZkeyIndex,
     getCircuitBySequencePosition,
     convertBytesOrKbToGb,
@@ -13,7 +12,6 @@ import {
     Contribution,
     ContributionValidity,
     FirebaseDocumentInfo,
-    generateValidContributionsAttestation,
     commonTerms,
     convertToDoubleDigits
 } from "@p0tion/actions"
@@ -23,7 +21,9 @@ import {
     getDocumentById,
     getParticipantsCollectionPath,
     getCurrentActiveParticipantTimeout,
-    getCircuitContributionsFromContributor
+    getCircuitContributionsFromContributor,
+    getContributionsValidityForContributor,
+    generateValidContributionsAttestation
 } from "../lib/database.js"
 import { DocumentSnapshot, DocumentData, Firestore, onSnapshot, Timestamp } from "firebase/firestore"
 import { Functions } from "firebase/functions"

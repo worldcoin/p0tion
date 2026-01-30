@@ -8,7 +8,6 @@ import {
     multiPartUpload,
     getVerifierContractStorageFilePath,
     finalizeCeremony,
-    generateValidContributionsAttestation,
     commonTerms,
     finalContributionIndex,
     computeSHA256ToHex,
@@ -23,7 +22,8 @@ import {
     getClosedCeremonies,
     getDocumentById,
     getParticipantsCollectionPath,
-    getCeremonyCircuits
+    getCeremonyCircuits,
+    generateValidContributionsAttestation
 } from "../lib/database.js"
 import { Functions } from "firebase/functions"
 import { Firestore } from "firebase/firestore"

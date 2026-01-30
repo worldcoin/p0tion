@@ -1,7 +1,7 @@
 {
     "name": "@worldcoin/world-id-trusted-setup-cli",
     "type": "module",
-    "version": "1.2.13",
+    "version": "1.2.14",
     "description": "CLI tool for running the trusted setup for the World ID Protocol 4.0 circuits which are part of oprf-service, made by TACEO and World. Fork of privacy-scaling-explorations/p0tion",
     "repository": {
         "type": "git",

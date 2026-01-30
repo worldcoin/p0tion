@@ -1,8 +1,6 @@
 import prompts, { Answers, Choice, PromptObject } from "prompts"
 import { Firestore } from "firebase/firestore"
 import {
-    fromQueryToFirebaseDocumentInfo,
-    getAllCollectionDocs,
     commonTerms,
     extractPrefix,
     autoGenerateEntropy,
@@ -15,6 +13,7 @@ import {
     vmConfigurationTypes,
     DiskTypeForVM
 } from "@p0tion/actions"
+import { fromQueryToFirebaseDocumentInfo, getAllCollectionDocs } from "./database.js"
 import theme from "./theme.js"
 import { COMMAND_ERRORS, showError } from "./errors.js"
 
