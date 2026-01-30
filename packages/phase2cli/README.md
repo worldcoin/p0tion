@@ -1,22 +1,22 @@
 <p align="center">
     <h1 align="center">
-        Phase2 CLI 👨‍💻
+        World ID Trusted Setup CLI 👨‍💻
     </h1>
-    <p align="center">All-in-one command line tool for interfacing with Groth16 zkSNARKs Phase 2 Trusted Setup ceremonies</p>
+    <p align="center">CLI for coordinating and contributing to the World ID Protocol 4.0 trusted setup</p>
 </p>
 
 <p align="center">
-    <a href="https://github.com/privacy-scaling-explorations/p0tion">
+    <a href="https://github.com/worldcoin/p0tion">
         <img src="https://img.shields.io/badge/project-p0tion-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/privacy-scaling-explorations/p0tion/blob/main/LICENSE">
-        <img alt="Github License" src="https://img.shields.io/github/license/privacy-scaling-explorations/p0tion.svg?style=flat-square">
+    <a href="https://github.com/worldcoin/p0tion/blob/dev/LICENSE">
+        <img alt="Github License" src="https://img.shields.io/github/license/worldcoin/p0tion.svg?style=flat-square">
     </a>
-    <a href="https://www.npmjs.com/package/@p0tion/phase2cli">
-        <img alt="NPM Version" src="https://img.shields.io/npm/v/@p0tion/phase2cli?style=flat-square" />
+    <a href="https://www.npmjs.com/package/@worldcoin/world-id-trusted-setup-cli">
+        <img alt="NPM Version" src="https://img.shields.io/npm/v/@worldcoin/world-id-trusted-setup-cli?style=flat-square" />
     </a>
-    <a href="https://npmjs.org/package/@p0tion/phase2cli">
-        <img alt="Downloads" src="https://img.shields.io/npm/dm/@p0tion/phase2cli.svg?style=flat-square" />
+    <a href="https://npmjs.org/package/@worldcoin/world-id-trusted-setup-cli">
+        <img alt="Downloads" src="https://img.shields.io/npm/dm/@worldcoin/world-id-trusted-setup-cli.svg?style=flat-square" />
     </a>
     <a href="https://eslint.org/">
         <img alt="Linter" src="https://img.shields.io/badge/linter-eslint-8080f2?style=flat-square&logo=eslint" />
@@ -28,11 +28,11 @@
 
 <div align="center">
     <h4>
-        <a href="https://github.com/privacy-scaling-explorations/p0tion/blob/main/CONTRIBUTING.md">
+        <a href="https://github.com/worldcoin/p0tion/blob/dev/CONTRIBUTING.md">
             👥 Contributing
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://github.com/privacy-scaling-explorations/p0tion/blob/main/CODE_OF_CONDUCT.md">
+        <a href="https://github.com/worldcoin/p0tion/blob/dev/CODE_OF_CONDUCT.md">
             🤝 Code of conduct
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
@@ -42,26 +42,46 @@
     </h4>
 </div>
 
-| The interaction with Trusted Setup ceremonies commonly involves the usage of different tools according to the roles (coordinator vs. participants) and ceremony stages (setup, contribution, finalization). The Phase2 CLI acts as an all-in-one independent interface with a custom set of user-friendly and interactive commands. |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| This CLI is a Worldcoin-maintained fork of p0tion and is used for coordinating and contributing to the World ID Protocol 4.0 trusted setup ceremonies. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-Rounding up the option of using a unique tool for different ceremony stages makes it possible to reduce the context switch, level of expertise, and bug exposure. This standard tool (built on top of the `actions` package) contains only the core commands for interfacing with one or more Trusted Setup Phase 2 ceremonies. You could get advantage from these commands and customize (or extend them) based on your unique ceremony needs. By using the CLI, the computing power of the contributor's machine could be fully exploited thus enabling contributions up to larger sizes than with ordinary web-browser clients.
+Rounding up the option of using a unique tool for different ceremony stages makes it possible to reduce the context switch, level of expertise, and bug exposure. This standard tool (built on top of the `actions` package) contains only the core commands for interfacing with one or more Trusted Setup Phase 2 ceremonies. You can customize (or extend) these commands based on your ceremony needs.
+
+## 🧩 Circuits in This Ceremony
+
+This trusted setup is for the World ID Protocol 4.0 circuits used by the `oprf-service` stack. The ceremony currently includes:
+
+- `OPRFQueryProof`
+- `OPRFNullifierProof`
+- `OPRFKeyGenProof13`
+- `OPRFKeyGenProof25`
+- `OPRFKeyGenProof37`
+
+For public context on the World ID 4.0 changes, see:
+
+```text
+https://x.com/worldcoin/status/2014009758706258024
+```
 
 ## 🛠 Installation
 
-Install the `@p0tion/phase2cli` package globally
+Install the `@worldcoin/world-id-trusted-setup-cli` package globally
 
 ```bash
-npm i -g @p0tion/phase2cli
+npm i -g @worldcoin/world-id-trusted-setup-cli
 ```
 
 or run specific commands with `npx`:
 
 ```bash
-npx @p0tion/phase2cli contribute
+npx @worldcoin/world-id-trusted-setup-cli contribute
 ```
 
-> Please note that phase2cli only runs on Linux or Mac systems. If a Windows user, please install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) first.
+> Please note that this CLI only runs on Linux or Mac systems. If a Windows user, please install WSL2 first:
+>
+> ```text
+> https://learn.microsoft.com/en-us/windows/wsl/install
+> ```
 
 ## 📜 Usage
 
@@ -69,7 +89,7 @@ npx @p0tion/phase2cli contribute
 
 **Prerequisites**
 
--   Node.js version 16.0 or higher.
+-   Node.js version 20.0 or higher.
 -   Yarn version 3.5.0 or higher.
 
 Copy the `.env.default` file as `.env`:
@@ -85,9 +105,9 @@ And add your environment variables.
 #### Core Commands
 
 ```bash
-Usage: phase2cli [options] [command]
+Usage: world-id-trusted-setup-cli [options] [command]
 
-All-in-one command line tool for interfacing with Groth16 zkSNARKs Phase 2 Trusted Setup ceremonies
+CLI for coordinating and contributing to the World ID Protocol 4.0 trusted setup
 
 Options:
   -V, --version   output the version number
@@ -105,7 +125,7 @@ Commands:
 #### Coordinator Commands
 
 ```bash
-Usage: phase2cli coordinate [options] [command]
+Usage: world-id-trusted-setup-cli coordinate [options] [command]
 
 special subset of commands for coordinating a ceremony (coordinator only)
 
@@ -117,4 +137,24 @@ Commands:
   observe         real-time updates about queue status for each ceremony circuit
   finalize        finalize a Phase2 Trusted Setup ceremony (beacon + artifacts exports)
   help [command]  display help for command
+
+## ✅ How to Contribute
+
+1) Authenticate
+
+```bash
+world-id-trusted-setup-cli auth
+```
+
+2) Contribute
+
+```bash
+world-id-trusted-setup-cli contribute
+```
+
+Package link:
+
+```text
+https://www.npmjs.com/package/@worldcoin/world-id-trusted-setup-cli
+```
 ```
