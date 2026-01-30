@@ -49,7 +49,7 @@ Rounding up the option of using a unique tool for different ceremony stages make
 
 ## 🧩 Circuits in This Ceremony
 
-This trusted setup is for the World ID Protocol 4.0 circuits used by the `oprf-service` stack. The ceremony currently includes:
+This trusted setup is for the World ID Protocol 4.0 circuits used by the [`oprf-service` stack](https://github.com/TaceoLabs/oprf-service/tree/02c6442349cc6a2baf35ec8d94ae5b4ac4f49a71/circom/main). The ceremony currently includes:
 
 - `OPRFQueryProof`
 - `OPRFNullifierProof`
@@ -57,11 +57,7 @@ This trusted setup is for the World ID Protocol 4.0 circuits used by the `oprf-s
 - `OPRFKeyGenProof25`
 - `OPRFKeyGenProof37`
 
-For public context on the World ID 4.0 changes, see:
-
-```text
-https://x.com/worldcoin/status/2014009758706258024
-```
+For public context on the World ID 4.0 changes, see [Introducing World ID 4.0](https://world.org/blog/engineering/introducing-world-id-4.0).
 
 ## 🛠 Installation
 
