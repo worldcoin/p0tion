@@ -11,7 +11,7 @@ import dotenv from "dotenv"
 import { fileURLToPath } from "url"
 import { dirname } from "path"
 import { AuthUser } from "../types/index.js"
-import { CONFIG_ERRORS, CORE_SERVICES_ERRORS, showError, THIRD_PARTY_SERVICES_ERRORS } from "./errors.js"
+import { CORE_SERVICES_ERRORS, showError, THIRD_PARTY_SERVICES_ERRORS } from "./errors.js"
 import {
     checkLocalAccessToken,
     deleteLocalAccessToken,
@@ -20,7 +20,9 @@ import {
 } from "./localConfigs.js"
 import theme from "./theme.js"
 import { exchangeGithubTokenForCredentials, getGithubProviderUserId, getUserHandleFromProviderUserId } from "./utils.js"
+import { config } from "./config.js"
 
+// Load .env file if present (for development/override)
 const packagePath = `${dirname(fileURLToPath(import.meta.url))}`
 dotenv.config({
     path: packagePath.includes(`src/lib`)
@@ -39,31 +41,14 @@ export const bootstrapCommandExecutionAndServices = async (): Promise<any> => {
     // Print header.
     console.log(theme.colors.magenta(figlet.textSync("Phase 2 cli", { font: "Ogre" })))
 
-    // Check configs.
-    if (!process.env.AUTH_GITHUB_CLIENT_ID) showError(CONFIG_ERRORS.CONFIG_GITHUB_ERROR, true)
-    if (
-        !process.env.FIREBASE_API_KEY ||
-        !process.env.FIREBASE_AUTH_DOMAIN ||
-        !process.env.FIREBASE_PROJECT_ID ||
-        !process.env.FIREBASE_MESSAGING_SENDER_ID ||
-        !process.env.FIREBASE_APP_ID ||
-        !process.env.FIREBASE_CF_URL_VERIFY_CONTRIBUTION
-    )
-        showError(CONFIG_ERRORS.CONFIG_FIREBASE_ERROR, true)
-    if (
-        !process.env.CONFIG_STREAM_CHUNK_SIZE_IN_MB ||
-        !process.env.CONFIG_CEREMONY_BUCKET_POSTFIX ||
-        !process.env.CONFIG_PRESIGNED_URL_EXPIRATION_IN_SECONDS
-    )
-        showError(CONFIG_ERRORS.CONFIG_OTHER_ERROR, true)
-
     // Initialize and return Firebase services instances (App, Firestore, Functions)
+    // Uses embedded production config with env var overrides
     return initializeFirebaseCoreServices(
-        String(process.env.FIREBASE_API_KEY),
-        String(process.env.FIREBASE_AUTH_DOMAIN),
-        String(process.env.FIREBASE_PROJECT_ID),
-        String(process.env.FIREBASE_MESSAGING_SENDER_ID),
-        String(process.env.FIREBASE_APP_ID)
+        config.FIREBASE_API_KEY,
+        config.FIREBASE_AUTH_DOMAIN,
+        config.FIREBASE_PROJECT_ID,
+        config.FIREBASE_MESSAGING_SENDER_ID,
+        config.FIREBASE_APP_ID
     )
 }
 
