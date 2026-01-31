@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "target": "es2020",
-        "module": "ESNext",
+        "module": "Node16",
         "moduleResolution": "Node16",
         "skipLibCheck": true,
         "allowSyntheticDefaultImports": true
