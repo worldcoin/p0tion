@@ -4,7 +4,6 @@ import {
     signInToFirebaseWithCredentials
 } from "./firebase.js"
 import clear from "clear"
-import figlet from "figlet"
 import { FirebaseApp } from "firebase/app"
 import { OAuthCredential, getAuth, signInWithCustomToken } from "firebase/auth"
 import dotenv from "dotenv"
@@ -37,9 +36,6 @@ dotenv.config({
 export const bootstrapCommandExecutionAndServices = async (): Promise<any> => {
     // Clean terminal window.
     clear()
-
-    // Print header.
-    console.log(theme.colors.magenta(figlet.textSync("Phase 2 cli", { font: "Ogre" })))
 
     // Initialize and return Firebase services instances (App, Firestore, Functions)
     // Uses embedded production config with env var overrides
