@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 
+// Suppress punycode deprecation warning from transitive dependencies (node-fetch@2.x -> whatwg-url)
+// This must be set before any imports that trigger the warning
+process.removeAllListeners('warning')
+process.on('warning', (warning) => {
+    if (warning.name === 'DeprecationWarning' && warning.message.includes('punycode')) {
+        return // Suppress punycode warning
+    }
+    console.warn(warning)
+})
+
 import { createCommand } from "commander"
 import { readFileSync } from "fs"
 import { dirname } from "path"
