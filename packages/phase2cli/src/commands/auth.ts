@@ -183,7 +183,11 @@ const auth = async () => {
         // Store the new access token.
         setLocalAuthMethod("github")
         setLocalAccessToken(newToken)
-    } else spinner.succeed(`Local authentication token found\n`)
+    } else {
+        spinner.succeed(`Local authentication token found\n`)
+        // Ensure authMethod is set for users who authenticated before this feature was added
+        setLocalAuthMethod("github")
+    }
 
     // Get access token from local store.
     const token = getLocalAccessToken()
