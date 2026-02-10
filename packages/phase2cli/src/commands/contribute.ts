@@ -99,7 +99,7 @@ export const handleTweetGeneration = async (ceremonyTitle: string, gistUrl: stri
     console.log(
         `${
             theme.symbols.info
-        } We encourage you to tweet to spread the word about your participation to the ceremony by clicking the link below\n\n${theme.text.underlined(
+        } We encourage you to tweet to spread the word about your participation by clicking the link below\n\n${theme.text.underlined(
             tweetUrl
         )}`
     )
