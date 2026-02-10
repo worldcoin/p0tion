@@ -10,7 +10,9 @@
     "homepage": "https://github.com/worldcoin/p0tion",
     "bugs": "https://github.com/worldcoin/p0tion/issues",
     "license": "MIT",
-    "bin": "./dist/index.js",
+    "bin": {
+        "world-id-trusted-setup-cli": "dist/index.js"
+    },
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
     "engines": {
