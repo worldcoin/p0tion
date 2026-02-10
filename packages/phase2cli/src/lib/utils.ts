@@ -309,18 +309,20 @@ export const publishGist = async (
  * @returns <string> - the ready to share tweet url.
  */
 export const generateCustomUrlToTweetAboutParticipation = (
-    ceremonyName: string,
+    _ceremonyName: string,
     gistUrl: string,
     isFinalizing: boolean
 ) => {
     const docsUrl = "https://github.com/worldcoin/world-id-protocol/tree/main/docs/world-id-4-trusted-setup"
-    const attestationPart = gistUrl ? `%20You%20can%20view%20my%20attestation%20here:%20${gistUrl}` : ""
+    const attestationPart = gistUrl ? ` You can view my attestation here: ${gistUrl}` : ""
 
-    // Keep the tweet intent flow, but use a fixed World ID 4.0 message.
-    // `ceremonyName` is kept for API compatibility with existing callers.
-    return isFinalizing
-        ? `https://twitter.com/intent/tweet?text=I%20contributed%20to%20the%20@worldcoin%20World%20ID%204.0%20trusted%20setup%20ceremony!%20Here%20is%20how%20you%20can%20too:%20${docsUrl}${attestationPart}`
-        : `https://twitter.com/intent/tweet?text=I%20contributed%20to%20the%20@worldcoin%20World%20ID%204.0%20trusted%20setup%20ceremony!%20Here%20is%20how%20you%20can%20too:%20${docsUrl}${attestationPart}`
+    const verb = isFinalizing ? "finalized" : "contributed to"
+    const tweetText = `I ${verb} the @worldcoin World ID 4.0 trusted setup ceremony! Here is how you can too: ${docsUrl}${attestationPart}`
+
+    // Build via URLSearchParams so all characters (including URLs) are properly encoded.
+    const url = new URL("https://twitter.com/intent/tweet")
+    url.searchParams.set("text", tweetText)
+    return url.toString()
 }
 
 /**
