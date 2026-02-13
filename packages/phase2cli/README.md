@@ -133,6 +133,7 @@ Commands:
   observe         real-time updates about queue status for each ceremony circuit
   finalize        finalize a Phase2 Trusted Setup ceremony (beacon + artifacts exports)
   help [command]  display help for command
+```
 
 ## ✅ How to Contribute
 
@@ -152,5 +153,4 @@ Package link:
 
 ```text
 https://www.npmjs.com/package/@worldcoin/world-id-trusted-setup-cli
-```
 ```

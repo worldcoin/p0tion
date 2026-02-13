@@ -379,12 +379,13 @@ const finalize = async (opt: any) => {
     )
 
     // Generate a ready to share custom url to tweet about ceremony participation.
-    const tweetUrl = generateCustomUrlToTweetAboutParticipation(ceremonyName, gistUrl, true)
+    // Use the same tweet copy as regular contributions.
+    const tweetUrl = generateCustomUrlToTweetAboutParticipation(ceremonyName, gistUrl, false)
 
     console.log(
         `${
             theme.symbols.info
-        } We encourage you to tweet about the ceremony finalization by clicking the link below\n\n${theme.text.underlined(
+        } We encourage you to tweet to spread the word about your participation by clicking the link below\n\n${theme.text.underlined(
             tweetUrl
         )}`
     )

@@ -26,6 +26,12 @@ docs/*
 !docs/CNAME
 !docs/index.html
 
+# manim renders
+manim/media/
+media/
+manim/.venv/
+__pycache__/
+
 
 *.env
 
